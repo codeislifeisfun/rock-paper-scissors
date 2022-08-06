@@ -28,9 +28,11 @@ function playRound(playerSelection, computerSelection) {
 function game(e) {
     let result = 0;
     let message = document.querySelector('.message');
+    
     let player = e.target.alt;
     let computer = getComputerChoice();
     result = playRound(player, computer);
+
     if (result === 1) {
         message.textContent = `player ${player} beats computer ${computer}`;
         playerScore++;
@@ -53,7 +55,7 @@ function game(e) {
         computerScore = 0;
         scoreboardPlayer.textContent = playerScore;
         scoreboardComputer.textContent = computerScore;
-        message.textContent = 'Let the game begin!!!'
+        message.textContent = 'One more time!!!'
     }   
 }
 
