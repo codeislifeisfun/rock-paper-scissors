@@ -25,32 +25,40 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
+function game(e) {
     let result = 0;
-    for (let i=0; i<5; i++) {
-        let player = prompt('enter choice').toLowerCase();
-        let computer = getComputerChoice();
-        result = playRound(player, computer);
-        if (result === 1) {
-            console.log(`player ${player} beats computer ${computer}`);
-            playerScore++;
-        } else if (result === -1) {
-            console.log(`computer ${computer} beats player ${player}`);
-            computerScore++;
-        } else {
-            console.log(`player ${player} ties computer ${computer}`);
-        }
-        console.log(`round ${i+1} >> player score ${playerScore} :: computer score ${computerScore}`);
-    }
-    if (playerScore === computerScore) {
-        console.log('it\'s a tie!');
-    } else if (playerScore > computerScore) {
-        console.log('player won!');
+    let message = document.querySelector('.message');
+    let player = e.target.alt;
+    let computer = getComputerChoice();
+    result = playRound(player, computer);
+    if (result === 1) {
+        message.textContent = `player ${player} beats computer ${computer}`;
+        playerScore++;
+        scoreboardPlayer.textContent = playerScore;
+    } else if (result === -1) {
+        message.textContent = `player ${player} loses to computer ${computer}`;
+        computerScore++;
+        scoreboardComputer.textContent = computerScore;
     } else {
-        console.log('computer won!');
+        message.textContent = `player ${player} ties computer ${computer}`;
     }
+    
+    if (playerScore === 5 || computerScore === 5) {
+        if (playerScore > computerScore) {
+            alert('player won!');
+        } else {
+            alert('computer won!');
+        }
+        playerScore = 0;
+        computerScore = 0;
+        scoreboardPlayer.textContent = playerScore;
+        scoreboardComputer.textContent = computerScore;
+        message.textContent = 'Let the game begin!!!'
+    }   
 }
 
-game();
+let scoreboardPlayer = document.querySelector('.player .score');
+let scoreboardComputer = document.querySelector('.computer .score');
+let playerScore = 0;
+let computerScore = 0;
+window.addEventListener('click', game);
