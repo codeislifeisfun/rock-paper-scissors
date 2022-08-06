@@ -30,6 +30,7 @@ function game(e) {
     let message = document.querySelector('.message');
     
     let player = e.target.alt;
+    if (!player) return;
     let computer = getComputerChoice();
     result = playRound(player, computer);
 
